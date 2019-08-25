@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <UserSecretsId>User-Secret-Academie.PawnShop</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="App_Data\logs\**" />
+      <Content Remove="App_Data\logs\**" />
+      <EmbeddedResource Remove="App_Data\logs\**" />
+      <None Remove="App_Data\logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentEmail.Razor" Version="2.7.0" />
+        <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.1" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+        <PackageReference Include="Serilog" Version="2.8.0" />
+        <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+        <PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" />
+        <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+        <PackageReference Include="Serilog.Sinks.Sentry.AspNetCore" Version="2.4.2" />
+        <PackageReference Include="Serilog.Sinks.SyslogServer" Version="1.0.10" />
+        <PackageReference Include="Spk.Common.Helpers" Version="1.8.1" />
+        <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Application\Academie.PawnShop.Application.csproj" />
+        <ProjectReference Include="..\Domain\Academie.PawnShop.Domain.csproj" />
+        <ProjectReference Include="..\Persistence\Academie.PawnShop.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\css\" />
+    </ItemGroup>
+
+</Project>

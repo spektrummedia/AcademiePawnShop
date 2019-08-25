@@ -1,0 +1,86 @@
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
+body {
+    background: #fff;
+    color: $primary;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    position: relative;
+    min-height: 100vh;
+
+    &.noscroll {
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    a {
+        color: $link-color;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+        transition: all 300ms ease;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+}
+
+p {
+    color: $gray-800;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.1875rem;
+    margin: 0.75rem 0;
+}
+
+img {
+    display: block;
+}
+
+button[type=submit] {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+sup {
+    font-size: 12px;
+    vertical-align: top;
+}
+
+*::selection {
+    background: $primary;
+    color: #fff;
+}
+
+*::focus {
+    display: none;
+}
+
+.gray-bg {
+    background: #eee;
+}
+
+.clear-offset {
+    margin: 3rem 0 0;
+}
+
+.hide {
+    display: none;
+}
+
+h1, h2, h3, h4 {
+    margin: 0 0 0.5rem;
+}
+
+@include breakpoint(md-up) {
+    html {
+        font-size: 16px;
+    }
+}

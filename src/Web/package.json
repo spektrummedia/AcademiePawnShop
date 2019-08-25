@@ -1,0 +1,44 @@
+{
+  "name": "academie-pawn-shop",
+  "version": "1.0.0",
+  "description": "Gulp workflow for static website development",
+  "author": "Spektrum Media <geeks@spektrummedia.com>",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"gulp\" \"dotnet watch run\"",
+    "dev": "gulp",
+    "sync": "gulp sync",
+    "build": "gulp build",
+    "prod": "gulp prod",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "autoprefixer": "~6.7",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "bootstrap": "^4.0.0-beta.3",
+    "browser-sync": "~2.18",
+    "concurrently": "^3.5.1",
+    "css-mqpacker": "~5.0",
+    "cssnano": "~3.10",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-concat": "~2.6",
+    "gulp-include": "~2.3",
+    "gulp-plumber": "~1.1",
+    "gulp-postcss": "~6.3",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "~2.6.0",
+    "gulp-uglify": "~2.0",
+    "jquery": "^3.2.1",
+    "node-notifier": "~5.0",
+    "postcss-pxtorem": "~4.0"
+  },
+  "engines": {
+    "node": "~6.9",
+    "npm": ">= 3.0.0"
+  },
+  "dependencies": {
+    "natives": "^1.1.6"
+  }
+}

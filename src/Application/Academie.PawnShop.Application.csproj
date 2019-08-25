@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.3.101.37" />
+    <PackageReference Include="FluentEmail.Razor" Version="2.7.0" />
+    <PackageReference Include="Spk.Common.Helpers" Version="1.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Academie.PawnShop.Domain.csproj" />
+    <ProjectReference Include="..\Persistence\Academie.PawnShop.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

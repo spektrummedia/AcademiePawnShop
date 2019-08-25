@@ -1,0 +1,78 @@
+// mixins
+
+@mixin clearfix {
+	&::after {
+		content: '';
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;
+	}
+}
+
+@mixin bgCover($pos:center) {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: $pos;
+}
+
+@mixin pagePaddingLeft {
+	padding-left: 2rem;
+
+	@include breakpoint(md-up) {
+		padding-left: 2rem;
+	}
+
+	@include breakpoint(lg-up) {
+		padding-left: 2rem;
+	}
+
+	@include breakpoint(xlg-up) {
+		padding-left: 4rem;
+	}
+}
+
+@mixin pagePaddingRight {
+	padding-right: 2rem;
+
+	@include breakpoint(md-up) {
+		padding-right: 2rem;
+	}
+
+	@include breakpoint(lg-up) {
+		padding-right: 2rem;
+	}
+
+	@include breakpoint(xlg-up) {
+		padding-right: 4rem;
+	}
+}
+
+@mixin pagePadding() {
+	@include pagePaddingLeft();
+	@include pagePaddingRight();
+}
+
+@mixin pagePaddingLarge() {
+	@include breakpoint(md-up) {
+		padding-left: 3rem;
+		padding-right: 3rem;
+	}
+
+	@include breakpoint(lg-up) {
+		padding-left: 6rem;
+		padding-right: 6rem;
+	}
+
+	@include breakpoint(xlg-up) {
+		padding-left: 12rem;
+		padding-right: 12rem;
+	}
+}
+
+
+// FREDE
+
+@mixin btest($color) {
+	border: 1px solid $color;
+}
