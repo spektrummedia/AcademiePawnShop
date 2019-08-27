@@ -10,7 +10,7 @@ namespace Academie.PawnShop.Domain.Entities
         [ForeignKey("EmployeeId")]
         public virtual Employee Employee { get; set; }
 
-        public float salary { get; set; }
+        public float Salary { get; set; }
 
         public DateTime Date { get; set; }
     }
