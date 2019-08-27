@@ -58,8 +58,8 @@ namespace Academie.PawnShop.Persistence.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeleteDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Price = table.Column<int>(nullable: false),
-                    Quatity = table.Column<int>(nullable: false)
+                    Price = table.Column<Double>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

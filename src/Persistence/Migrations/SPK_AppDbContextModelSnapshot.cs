@@ -84,9 +84,9 @@ namespace Academie.PawnShop.Persistence.Migrations
 
                     b.Property<DateTime?>("LastUpdateDate");
 
-                    b.Property<string>("name");
+                    b.Property<string>("Name");
 
-                    b.Property<string>("phoneNumber");
+                    b.Property<string>("PhoneNumber");
 
                     b.HasKey("Id");
 
@@ -130,8 +130,6 @@ namespace Academie.PawnShop.Persistence.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<DateTime>("Date");
-
                     b.Property<DateTime?>("DeleteDate");
 
                     b.Property<Guid?>("EmployeeId");
@@ -140,7 +138,7 @@ namespace Academie.PawnShop.Persistence.Migrations
 
                     b.Property<DateTime?>("LastUpdateDate");
 
-                    b.Property<float>("salary");
+                    b.Property<float>("Salary");
 
                     b.HasKey("Id");
 
@@ -162,11 +160,11 @@ namespace Academie.PawnShop.Persistence.Migrations
 
                     b.Property<DateTime?>("LastUpdateDate");
 
-                    b.Property<string>("name");
+                    b.Property<string>("Name");
 
-                    b.Property<int>("price");
+                    b.Property<double>("Price");
 
-                    b.Property<int>("quatity");
+                    b.Property<int>("Quantity");
 
                     b.HasKey("Id");
 

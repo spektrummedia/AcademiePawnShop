@@ -1,11 +1,11 @@
 ﻿@page
-@model Academie.PawnShop.Web.Pages.Backstore.Products.EditModel
+@model Academie.PawnShop.Web.Pages.Backstore.Products.CreateModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
 <h4>Product</h4>
 <hr />
@@ -23,7 +23,11 @@
                 <input asp-for="Product.Quantity" class="form-control" />
                 <span asp-validation-for="Product.Quantity" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Product.Id" />
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Product.CreationDate" class="control-label"></label>
                 <input asp-for="Product.CreationDate" class="form-control" />
@@ -36,7 +40,7 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Product.IsDeleted" /> @Html.DisplayNameFor(model => model.Product.IsDeleted)
+                    <input class="form-check-input" asp-for="Product.IsDeleted" /> @Html.DisplayNameFor(model => model.Product.IsDeleted))
                 </label>
             </div>
             <div class="form-group">
@@ -45,14 +49,14 @@
                 <span asp-validation-for="Product.DeleteDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -4,18 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Academie.PawnShop.Domain;
 using Academie.PawnShop.Domain.Entities;
 
 namespace Academie.PawnShop.Web.Pages.Backstore.Products
 {
-    public class EditModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly Academie.PawnShop.Domain.PawnShopDbContext _context;
 
-        public EditModel(Academie.PawnShop.Domain.PawnShopDbContext context)
+        public DeleteModel(Academie.PawnShop.Domain.PawnShopDbContext context)
         {
             _context = context;
         }
@@ -39,37 +38,22 @@ namespace Academie.PawnShop.Web.Pages.Backstore.Products
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Product).State = EntityState.Modified;
+            Product = await _context.Products.FindAsync(id);
 
-            try
+            if (Product != null)
             {
+                _context.Products.Remove(Product);
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(Product.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool ProductExists(Guid id)
-        {
-            return _context.Products.Any(e => e.Id == id);
         }
     }
 }
