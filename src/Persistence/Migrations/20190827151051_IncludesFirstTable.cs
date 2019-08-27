@@ -16,8 +16,8 @@ namespace Academie.PawnShop.Persistence.Migrations
                     LastUpdateDate = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeleteDate = table.Column<DateTime>(nullable: true),
-                    name = table.Column<string>(nullable: true),
-                    phoneNumber = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,9 +57,9 @@ namespace Academie.PawnShop.Persistence.Migrations
                     LastUpdateDate = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeleteDate = table.Column<DateTime>(nullable: true),
-                    name = table.Column<string>(nullable: true),
-                    price = table.Column<int>(nullable: false),
-                    quatity = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true),
+                    Price = table.Column<int>(nullable: false),
+                    Quatity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,8 +76,7 @@ namespace Academie.PawnShop.Persistence.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeleteDate = table.Column<DateTime>(nullable: true),
                     EmployeeId = table.Column<Guid>(nullable: true),
-                    salary = table.Column<float>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Salary = table.Column<float>(nullable: false),
                 },
                 constraints: table =>
                 {

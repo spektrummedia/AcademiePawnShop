@@ -15,6 +15,8 @@ namespace Academie.PawnShop.Domain
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Paid> Paid { get; set; }
+        public DbSet<Billing> Billing { get; set; }
+        public DbSet<BillingProduct> BillingProduct { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)   
         {

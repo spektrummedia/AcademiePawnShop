@@ -11,7 +11,6 @@ namespace Academie.PawnShop.Domain.Entities
         public virtual Employee Employee { get; set; }
 
         public float Salary { get; set; }
-
-        public DateTime Date { get; set; }
+       
     }
 }
