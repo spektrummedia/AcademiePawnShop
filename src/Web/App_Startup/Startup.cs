@@ -40,7 +40,7 @@ namespace Academie.PawnShop.Web.App_Startup
 
             services.AddIdentity<User, Role>(options =>
                 {
-                    options.SignIn.RequireConfirmedEmail = true;
+                    options.SignIn.RequireConfirmedEmail = false;
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
@@ -54,6 +54,7 @@ namespace Academie.PawnShop.Web.App_Startup
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AuthorizeFolder("/Account/Manage");
+                    options.Conventions.AuthorizeFolder("/Backstore");
                     options.Conventions.AuthorizePage("/Account/Logout");
                 });
         }

@@ -1,0 +1,26 @@
+﻿@page "{slug}"
+@model Academie.PawnShop.Web.Pages.Backstore.Products.EditModel
+@{
+    ViewData["Title"] = "Modifier";
+}
+
+<h1>Modifier un produit</h1>
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Product.Id)
+    <div>
+        <label>@Model.Product.Name </label>
+        @Html.TextBoxFor(model => model.Product.Name)
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Product.Price)
+        @Html.TextBoxFor(model => model.Product.Price)
+    </div>
+   <div>
+        @Html.LabelFor(model => model.Product.Quantity)
+        @Html.TextBoxFor(model => model.Product.Quantity)
+    </div>
+    
+    <button type="submit">Sauvegarder</button>
+}
