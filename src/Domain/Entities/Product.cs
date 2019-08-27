@@ -7,10 +7,10 @@ namespace Academie.PawnShop.Domain.Entities
 {
     public class Product : EntityBase<Guid>
     {
-        public string name { get; set; }
+        public string Name { get; set; }
 
-        public int price { get; set; }
+        public int Price { get; set; }
 
-        public int quatity { get; set; }
+        public int Quatity { get; set; }
     }
 }

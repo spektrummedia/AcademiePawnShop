@@ -77,7 +77,6 @@ namespace Academie.PawnShop.Persistence.Migrations
                     DeleteDate = table.Column<DateTime>(nullable: true),
                     EmployeeId = table.Column<Guid>(nullable: true),
                     Salary = table.Column<float>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
