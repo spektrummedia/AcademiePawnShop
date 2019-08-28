@@ -11,7 +11,7 @@ namespace Academie.PawnShop.Domain.Entities
 
         public User()
         {
-            Address = new Address();
+            Address = new Address(); // All OwnedType must be initialized first.
         }
     }
 }

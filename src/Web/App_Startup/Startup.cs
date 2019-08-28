@@ -61,7 +61,7 @@ namespace Academie.PawnShop.Web.App_Startup
 
             // Register services
             services
-                .AddScoped<IInventoryService, InventoryService>();
+                .AddScoped<IInventoryService, InventoryService>(); // Scoped, Transient, Singleton
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

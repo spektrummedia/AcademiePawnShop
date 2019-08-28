@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Academie.PawnShop.Application.Services;
+﻿using Academie.PawnShop.Application.Services;
+using Academie.PawnShop.Domain;
+using Academie.PawnShop.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Academie.PawnShop.Domain;
-using Academie.PawnShop.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Academie.PawnShop.Web.Pages.Backstore.Products
 {
-    
+    [Authorize(Roles = "Administrator, Super Administrator")]
     public class IndexModel : PageModel
     {
         private readonly PawnShopDbContext _db;

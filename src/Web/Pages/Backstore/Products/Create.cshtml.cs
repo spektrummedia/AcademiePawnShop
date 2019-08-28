@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Academie.PawnShop.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Academie.PawnShop.Domain;
-using Academie.PawnShop.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace Academie.PawnShop.Web.Pages.Backstore.Products
 {
+    [Authorize(Roles = "Super Administrator")]
     public class CreateModel : PageModel
     {
         private readonly Academie.PawnShop.Domain.PawnShopDbContext _context;
