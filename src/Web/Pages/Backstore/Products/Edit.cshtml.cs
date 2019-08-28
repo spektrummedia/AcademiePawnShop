@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Academie.PawnShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Academie.PawnShop.Domain;
-using Academie.PawnShop.Domain.Entities;
 
 namespace Academie.PawnShop.Web.Pages.Backstore.Products
 {
     public class EditModel : PageModel
     {
-        private readonly Academie.PawnShop.Domain.PawnShopDbContext _context;
+        private readonly PawnShopDbContext _db;
 
-        public EditModel(Academie.PawnShop.Domain.PawnShopDbContext context)
+        public EditModel(Academie.PawnShop.Domain.PawnShopDbContext db)
         {
-            _context = context;
+            _db = db;
         }
 
         [BindProperty]
@@ -30,46 +28,33 @@ namespace Academie.PawnShop.Web.Pages.Backstore.Products
                 return NotFound();
             }
 
-            Product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
+            Product = await _db.Products.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Product == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            var product = await _db.Products.FirstOrDefaultAsync(m => m.Id == id);
 
-            _context.Attach(Product).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(Product.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            product.Name = Product.Name;
+            product.Quantity = Product.Quantity;
+            product.Price = Product.Price;
 
-            return RedirectToPage("./Index");
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage("/Backstore/Products/Index");
         }
 
         private bool ProductExists(Guid id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _db.Products.Any(e => e.Id == id);
         }
     }
 }

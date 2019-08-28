@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Academie.PawnShop.Application;
+using Academie.PawnShop.Application.Services;
 using Academie.PawnShop.Domain;
 using Academie.PawnShop.Domain.Entities;
 using Academie.PawnShop.Persistence;
@@ -57,6 +58,10 @@ namespace Academie.PawnShop.Web.App_Startup
                     options.Conventions.AuthorizeFolder("/Backstore");
                     options.Conventions.AuthorizePage("/Account/Logout");
                 });
+
+            // Register services
+            services
+                .AddScoped<IInventoryService, InventoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
