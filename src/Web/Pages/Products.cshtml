@@ -1,0 +1,22 @@
+﻿@page
+@model Academie.PawnShop.Web.Pages.ProductsModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>All products</h1>
+
+
+<div class="flex-container">
+    @foreach (var product in Model.Products)
+    {
+        <div class="flex-item card">
+            <img src="https://lorempixel.com/200/200/sports/?name=@product.Name"/>
+            <div>
+                <span>@product.Name</span> - @product.Price$
+            </div>
+            <a class="button--buy">Buy</a>
+        </div>
+    }
+    
+</div>
