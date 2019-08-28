@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Academie.PawnShop.Domain.Entities
 {
@@ -7,6 +9,7 @@ namespace Academie.PawnShop.Domain.Entities
         public string Name { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
+        public IEnumerable<ProductCategory> Categories { get; set; } 
             
         
     }
