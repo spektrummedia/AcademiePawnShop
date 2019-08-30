@@ -56,6 +56,9 @@ namespace Academie.PawnShop.Web.Areas.Dev
             foreach (var superAdmin in SuperAdmins.GetAllSuperAdmins())
                 await CreateUser(superAdmin, Constants.Authorization.Roles.SUPER_ADMIN);
 
+            foreach (var fakeUser in UserFaker.DefaultInstance.Generate(1))
+                await CreateUser(fakeUser, Constants.Authorization.Roles.ADMIN);
+
             foreach (var fakeUser in UserFaker.DefaultInstance.Generate(5))
                 await CreateUser(fakeUser, Constants.Authorization.Roles.USER);
 
