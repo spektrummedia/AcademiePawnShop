@@ -29,9 +29,6 @@ namespace Academie.PawnShop.Domain
 
             builder.Entity<User>()
                .OwnsOne(x => x.Address);
-
-            builder.Entity<Employee>()
-               .OwnsOne(x => x.Address);
         }
     }
 }

@@ -50,9 +50,6 @@ namespace Academie.PawnShop.Persistence.Migrations
                     DeleteDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    Address_Street = table.Column<string>(nullable: true),
-                    Address_City = table.Column<string>(nullable: true),
-                    Address_PostalCode = table.Column<string>(nullable: true),
                     Salary = table.Column<float>(nullable: false),
                     JobTitleId = table.Column<Guid>(nullable: true)
                 },

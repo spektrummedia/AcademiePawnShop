@@ -11,17 +11,11 @@ namespace Academie.PawnShop.Domain.Entities
 
         public string LastName { get; set; }
 
-        public Address Address { get; set; }
-
         public float Salary { get; set; }
 
         [ForeignKey("JobTitleId")]
         public JobTitle JobTitle { get; set; }
 
-        public Employee()
-        {
-            Address = new Address(); // All OwnedType must be initialized first.
-        }
 
         public IEnumerable<EmployeePay> Pay { get; set; }
     }
