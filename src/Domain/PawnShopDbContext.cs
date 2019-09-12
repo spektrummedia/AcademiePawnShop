@@ -14,6 +14,9 @@ namespace Academie.PawnShop.Domain
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<JobTitle> JobTitles { get; set; }
+        public DbSet<Pay> Pay{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -25,6 +28,9 @@ namespace Academie.PawnShop.Domain
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.Entity<User>()
+               .OwnsOne(x => x.Address);
+
+            builder.Entity<Employee>()
                .OwnsOne(x => x.Address);
         }
     }
