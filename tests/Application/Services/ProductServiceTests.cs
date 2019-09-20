@@ -1,8 +1,8 @@
 ﻿using Academie.PawnShop.Application.Services;
+using Academie.PawnShop.Domain;
+using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Academie.PawnShop.Tests.Application.Services
@@ -13,11 +13,16 @@ namespace Academie.PawnShop.Tests.Application.Services
         public void ProductService_Should_Add_Taxe()
         {
             //Arange
+            var options = new DbContextOptionsBuilder<PawnShopDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            var db = new PawnShopDbContext(options);
+
             var productQuantity = 10;
             var productPrice = 10;
 
             //Act
-            var productService = new ProductService();
+            var productService = new ProductService(db);
             productService.SetPriceWithTaxe(productQuantity, productPrice);
 
             //Assert
@@ -33,9 +38,13 @@ namespace Academie.PawnShop.Tests.Application.Services
         public void SetDeal(double quantity, double deal)
         {
             //Arrange
+            var options = new DbContextOptionsBuilder<PawnShopDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            var db = new PawnShopDbContext(options);
 
             //Act
-            var productService = new ProductService();
+            var productService = new ProductService(db);
             productService.SetDeal(quantity);
             //Assert
 

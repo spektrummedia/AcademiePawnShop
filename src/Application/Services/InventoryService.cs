@@ -8,10 +8,12 @@ namespace Academie.PawnShop.Application.Services
 {
     public class InventoryService : IInventoryService
     {
+        private readonly IProductService _productService;
         private readonly PawnShopDbContext _db;
 
-        public InventoryService(PawnShopDbContext db)
+        public InventoryService(IProductService productService, PawnShopDbContext db)
         {
+            _productService = productService.GuardIsNotNull(nameof(productService));
             _db = db.GuardIsNotNull(nameof(db));
         }
 
@@ -22,7 +24,7 @@ namespace Academie.PawnShop.Application.Services
 
         public async Task ReplenishInventory(Guid productId, int quantityToOrder = 10)
         {
-            var product = _db.Products.FirstOrDefault(x => x.Id == productId);
+            var product = _productService.GetProductById(productId);
 
             if (product == null)
                 return;

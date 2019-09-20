@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Academie.PawnShop.Application.Services;
+﻿using Academie.PawnShop.Application.Services;
 using Academie.PawnShop.Domain;
 using Academie.PawnShop.Domain.Entities;
-using Amazon.Runtime;
-using Microsoft.AspNetCore.Http.Authentication.Internal;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Shouldly;
+using System;
 using Xunit;
 
 namespace Academie.PawnShop.Tests.Application.Services
@@ -26,12 +23,16 @@ namespace Academie.PawnShop.Tests.Application.Services
                 .Options;
             var db = new PawnShopDbContext(options);
 
+            var productServiceMock = new Mock<IProductService>();
+            
             var product = new Product()
             {
                 Name = "Rasberry PI 2",
                 Quantity = 3,
                 Price = 10.99
             };
+            productServiceMock.Setup(x => x.GetProductById(It.IsAny<Guid>())).Returns(product);
+
             var expectedQuantity = product.Quantity + quantityToOrder;
 
             db.Products.Add(product);
@@ -39,7 +40,7 @@ namespace Academie.PawnShop.Tests.Application.Services
 
 
             // Act
-            var service = new InventoryService(db);
+            var service = new InventoryService(productServiceMock.Object, db);
             var result = service.ReplenishInventory(product.Id, quantityToOrder);
 
             // Assert
@@ -55,12 +56,17 @@ namespace Academie.PawnShop.Tests.Application.Services
                 .Options;
             var db = new PawnShopDbContext(options);
 
+            var productServiceMock = new Mock<IProductService>();
+            productServiceMock.Setup(x => x.GetProductById(It.IsAny<Guid>()));
+
             var product = new Product()
             {
                 Name = "Rasberry PI 2",
                 Quantity = 3,
                 Price = 10.99
             };
+            productServiceMock.Setup(x => x.GetProductById(It.IsAny<Guid>())).Returns(product);
+
             const int DEFAULT_QUANTITY = 10;
             var expectedQuantity = product.Quantity + DEFAULT_QUANTITY;
 
@@ -69,10 +75,11 @@ namespace Academie.PawnShop.Tests.Application.Services
 
 
             // Act
-            var service = new InventoryService(db);
+            var service = new InventoryService(productServiceMock.Object, db);
             var result = service.ReplenishInventory(product.Id);
 
             // Assert
+            productServiceMock.Verify(x => x.GetProductById(It.Is<Guid>(id => id == product.Id)), Times.Once);
             product.Quantity.ShouldBe(expectedQuantity);
         }
 

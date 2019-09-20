@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Academie.PawnShop.Domain;
+using Academie.PawnShop.Domain.Entities;
+using System;
+using System.Linq;
+using Spk.Common.Helpers.Guard;
 
 namespace Academie.PawnShop.Application.Services
 {
-    public class ProductService : IProductServices
+    public class ProductService : IProductService
     {
+        private readonly PawnShopDbContext _db;
         private const double tps = 5;
         private const double tvq = 9.25;
 
@@ -14,11 +17,21 @@ namespace Academie.PawnShop.Application.Services
 
         public double Deal { get; set; }
 
+
+        public ProductService(PawnShopDbContext db)
+        {
+            _db = db.GuardIsNotNull(nameof(db));
+        }
+
+        public Product GetProductById(Guid id)
+        {
+            return _db.Products.FirstOrDefault(x => x.Id == id);
+        }
+
         public void SetPriceWithTaxe(double quantity, double productPrice)
         {
-            
-            var taxe = (productPrice * quantity) * (tps / 100);
-            Total = (productPrice * quantity) + 5;
+            var tax = (productPrice * quantity) * (tps / 100);
+            Total = (productPrice * quantity) + tax;
         }
 
         public void SetDeal(double quantity)

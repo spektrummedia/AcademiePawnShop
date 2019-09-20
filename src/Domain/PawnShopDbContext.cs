@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Academie.PawnShop.Domain.Entities;
+using System;
 
 namespace Academie.PawnShop.Domain
 {
