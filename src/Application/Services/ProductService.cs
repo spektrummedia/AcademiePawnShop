@@ -10,7 +10,7 @@ namespace Academie.PawnShop.Application.Services
     {
         private readonly PawnShopDbContext _db;
         private const double tps = 5;
-        private const double tvq = 9.25;
+        private const double tvq = 9.975;
 
         public int Quatity { get; set; }
         public double Total { get; set; }
@@ -30,7 +30,8 @@ namespace Academie.PawnShop.Application.Services
 
         public void SetPriceWithTaxe(double quantity, double productPrice)
         {
-            var tax = (productPrice * quantity) * (tps / 100);
+            
+            var tax = (productPrice * quantity) * ((tps + tvq )/ 100);
             Total = (productPrice * quantity) + tax;
         }
 

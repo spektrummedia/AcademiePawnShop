@@ -26,7 +26,7 @@ namespace Academie.PawnShop.Tests.Application.Services
             productService.SetPriceWithTaxe(productQuantity, productPrice);
 
             //Assert
-            productService.Total.ShouldBe(105);
+            productService.Total.ShouldBe(114.975);
 
         }
 
