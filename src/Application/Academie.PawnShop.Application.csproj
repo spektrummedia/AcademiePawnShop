@@ -1,13 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.3.101.37" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.5.0-beta" />
     <PackageReference Include="FluentEmail.Razor" Version="2.7.0" />
-    <PackageReference Include="Spk.Common.Helpers" Version="1.8.1" />
+    <PackageReference Include="Spk.Common.Helpers" Version="1.11.1" />
   </ItemGroup>
 
   <ItemGroup>

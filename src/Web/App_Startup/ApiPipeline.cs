@@ -6,10 +6,14 @@ namespace Academie.PawnShop.Web.App_Startup
 {
     internal static class ApiPipeline
     {
-        public static void Configure(IApplicationBuilder api, IHostingEnvironment hostingEnvironment)
-        {
-            api.UseCors(hostingEnvironment.EnvironmentName);
-            api.UseMvc(mvc => { mvc.MapAreaRoute("api_route", AreaNames.Api, "{controller=Home}/{action=Index}"); });
+        public static void Configure(IApplicationBuilder api, IWebHostEnvironment env)
+        {            
+            api.UseRouting();         
+                  
+
+            api.UseEndpoints(endpoints =>
+                endpoints.MapAreaControllerRoute("api_route", AreaNames.Api, "{controller=Home}/{action=Index}")
+            );
         }
     }
 }

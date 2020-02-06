@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Academie.PawnShop.Web.Pages.Backstore.Products
 {
-    [Authorize(Roles = "Super Administrator")]
+ //   [Authorize(Roles = "Super Administrator")]
     public class CreateModel : PageModel
     {
         private readonly Academie.PawnShop.Domain.PawnShopDbContext _context;

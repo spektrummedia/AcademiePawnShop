@@ -3,18 +3,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Academie.PawnShop.Application;
+using Microsoft.Extensions.Hosting;
 
 namespace Academie.PawnShop.Web.App_Startup
 {
     internal static class AppPipeline
     {
-        public static void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment)
+        public static void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (hostingEnvironment.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
-                app.UseDatabaseErrorPage();
+                app.UseDatabaseErrorPage(); 
             }
             else
             {
@@ -22,15 +23,13 @@ namespace Academie.PawnShop.Web.App_Startup
             }
 
             app.UseStaticFiles();
-
+            app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    "default",
-                    "{controller}/{action=Index}/{id?}");
-            });
+            app.UseEndpoints(endpoints =>
+                endpoints.MapRazorPages()
+               );
 
             var serviceScopeFactory = app.ApplicationServices.GetService<IServiceScopeFactory>();
             using (IServiceScope scope = serviceScopeFactory.CreateScope())
