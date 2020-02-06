@@ -5,7 +5,6 @@ using Academie.PawnShop.Application.Services;
 using Academie.PawnShop.Domain;
 using Academie.PawnShop.Domain.Entities;
 using Amazon.Runtime;
-using Microsoft.AspNetCore.Http.Authentication.Internal;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Xunit;

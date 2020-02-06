@@ -4,6 +4,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Academie.PawnShop.Web.App_Startup;
+using Microsoft.Extensions.Hosting;
 
 namespace Academie.PawnShop.Web
 {
@@ -17,25 +18,25 @@ namespace Academie.PawnShop.Web
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) => CreateWebHostBuilder(args).Build();
+        public static IHost BuildWebHost(string[] args) => CreateWebHostBuilder(args).Build();
 
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseApplicationInsights()
-                .ConfigureAppConfiguration(config => config.AddJsonFile("appsettings.local.json", true))
-                .ConfigureLogging((ctx, logging) =>
-                {
-                    Logging.Configure(
-                        logging,
-                        ctx.HostingEnvironment,
-                        ctx.Configuration.GetSection("Logging"));
-                })
-                .UseKestrel()
-                .UseUrls(
-                    "https://Academie.PawnShop.local:5000"
-                )
-                .UseIISIntegration()
-                .UseStartup<Startup>();
+        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+               Host.CreateDefaultBuilder(args)
+              .ConfigureWebHostDefaults(webBuilder =>
+              {
+                  webBuilder
+                      .ConfigureAppConfiguration(config => config.AddJsonFile("appsettings.local.json", true))
+                      .ConfigureLogging((ctx, logging) =>
+                       {
+                           Logging.Configure(
+                               logging,
+                               ctx.HostingEnvironment,
+                               ctx.Configuration.GetSection("Logging"));
+                       })
+                  .UseKestrel()
+                  .UseIISIntegration()                  
+                  .UseUrls("https://Academie.PawnShop.local:5000")
+                  .UseStartup<Startup>();
+              });
     }
 }

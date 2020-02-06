@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
@@ -15,7 +16,7 @@ namespace Academie.PawnShop.Web.App_Startup
 
         internal static void Configure(
             ILoggingBuilder loggingBuilder,
-            IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment hostingEnvironment,
             IConfigurationSection loggingConfig)
         {
             var loggerConfiguration = new LoggerConfiguration();

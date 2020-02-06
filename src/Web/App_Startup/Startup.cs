@@ -10,29 +10,28 @@ using Academie.PawnShop.Application.Services;
 using Academie.PawnShop.Domain;
 using Academie.PawnShop.Domain.Entities;
 using Academie.PawnShop.Persistence;
+using Microsoft.Extensions.Hosting;
 
 namespace Academie.PawnShop.Web.App_Startup
 {
     public class Startup
     {
         public Startup(
-            IConfiguration configuration, 
-            IHostingEnvironment hostingEnvironment)
+            IConfiguration configuration)
         {
             Configuration = configuration;
-            HostingEnvironment = hostingEnvironment;
         }
 
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment HostingEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
+       
 
-            MailingServices.Configure(services, HostingEnvironment, Configuration.GetSection("Mailing"));
+          //  MailingServices.Configure(services, Configuration.GetSection("Mailing"));
             services.AddTransient<DatabaseMigrator>();
 
             services.AddDbContext<PawnShopDbContext>(options => options.UseSqlServer(
@@ -51,7 +50,13 @@ namespace Academie.PawnShop.Web.App_Startup
                 .AddEntityFrameworkStores<PawnShopDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc()
+            services.AddControllers()
+                .AddNewtonsoftJson();
+
+            services.AddControllersWithViews();
+
+            services.AddRazorPages()
+                .AddNewtonsoftJson()
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AuthorizeFolder("/Account/Manage");
@@ -65,14 +70,21 @@ namespace Academie.PawnShop.Web.App_Startup
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (!HostingEnvironment.IsProduction())
-                app.Map("/.dev", dev => DevPipeline.Configure(dev, HostingEnvironment));
+            if (!env.IsProduction())
+                app.Map("/.dev", dev => DevPipeline.Configure(dev, env));
 
-            app.Map("/api", api => ApiPipeline.Configure(api, HostingEnvironment));
+            app.Map("/api", api => ApiPipeline.Configure(api, env));
 
-            AppPipeline.Configure(app, HostingEnvironment);
+            AppPipeline.Configure(app, env);
+            
+            
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

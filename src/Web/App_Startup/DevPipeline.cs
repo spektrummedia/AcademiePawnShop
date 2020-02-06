@@ -3,22 +3,23 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.FileProviders;
 using Academie.PawnShop.Web.Areas;
+using Microsoft.Extensions.Hosting;
 
 namespace Academie.PawnShop.Web.App_Startup
 {
     internal static class DevPipeline
     {
-        public static void Configure(IApplicationBuilder dev, IHostingEnvironment hostingEnvironment)
+        public static void Configure(IApplicationBuilder dev, IWebHostEnvironment env)
         {
             dev.UseStatusCodePages();
 
-            if (hostingEnvironment.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 dev.UseDeveloperExceptionPage();
-                dev.UseDatabaseErrorPage();
+                dev.UseDatabaseErrorPage(); 
             }
 
-            var devFileProvider = new PhysicalFileProvider(Path.Combine(hostingEnvironment.WebRootPath, ".dev"));
+            var devFileProvider = new PhysicalFileProvider(Path.Combine(env.WebRootPath, ".dev"));
 
             dev.UseStaticFiles(new StaticFileOptions
             {
@@ -34,7 +35,10 @@ namespace Academie.PawnShop.Web.App_Startup
                     FileProvider = devFileProvider
                 });
 
-            dev.UseMvc(mvc => { mvc.MapAreaRoute("dev_route", AreaNames.Dev, "{controller}/{action}"); });
+            dev.UseRouting();
+            dev.UseEndpoints(endpoints =>
+                               endpoints.MapAreaControllerRoute("dev_route", AreaNames.Dev, "{controller}/{action}")
+                           );
         }
     }
 }
