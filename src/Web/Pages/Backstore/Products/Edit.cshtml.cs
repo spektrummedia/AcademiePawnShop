@@ -1,11 +1,11 @@
-﻿using Academie.PawnShop.Domain.Entities;
+﻿using Academie.PawnShop.Domain;
+using Academie.PawnShop.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Academie.PawnShop.Domain;
 
 namespace Academie.PawnShop.Web.Pages.Backstore.Products
 {
@@ -13,13 +13,13 @@ namespace Academie.PawnShop.Web.Pages.Backstore.Products
     {
         private readonly PawnShopDbContext _db;
 
-        public EditModel(Academie.PawnShop.Domain.PawnShopDbContext db)
+        [BindProperty]
+        public Product Product { get; set; }
+
+        public EditModel(PawnShopDbContext db)
         {
             _db = db;
         }
-
-        [BindProperty]
-        public Product Product { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {

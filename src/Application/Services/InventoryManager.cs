@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Academie.PawnShop.Application.Services
 {
-    public class InventoryService : IInventoryService
+    public class InventoryManager : IInventoryManager
     {
         private readonly PawnShopDbContext _db;
 
-        public InventoryService(PawnShopDbContext db)
+        public InventoryManager(PawnShopDbContext db)
         {
             _db = db.GuardIsNotNull(nameof(db));
         }

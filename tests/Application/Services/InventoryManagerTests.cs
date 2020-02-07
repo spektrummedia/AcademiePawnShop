@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Academie.PawnShop.Application.Services;
+﻿using Academie.PawnShop.Application.Services;
 using Academie.PawnShop.Domain;
 using Academie.PawnShop.Domain.Entities;
-using Amazon.Runtime;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Academie.PawnShop.Tests.Application.Services
 {
-    public class InventoryServiceTests
+    public class InventoryManagerTests
     {
         [Theory]
         [InlineData(0)]
         [InlineData(20)]
         [InlineData(-5)]
-        public void InventoryService_Should_Replenish_Stocks_For_Product(int quantityToOrder)
+        public async Task InventoryManager_Should_Replenish_Stocks_For_Product(int quantityToOrder)
         {
             // Arrange
             var options = new DbContextOptionsBuilder<PawnShopDbContext>()
@@ -38,15 +36,15 @@ namespace Academie.PawnShop.Tests.Application.Services
 
 
             // Act
-            var service = new InventoryService(db);
-            var result = service.ReplenishInventory(product.Id, quantityToOrder);
+            var manager = new InventoryManager(db);
+            await manager.ReplenishInventory(product.Id, quantityToOrder);
 
             // Assert
             product.Quantity.ShouldBe(expectedQuantity);
         }
         
         [Fact]
-        public void InventoryService_Should_Replenish_Stocks_For_Product_Using_Default_Value()
+        public async Task InventoryManager_Should_Replenish_Stocks_For_Product_Using_Default_Value()
         {
             // Arrange
             var options = new DbContextOptionsBuilder<PawnShopDbContext>()
@@ -68,11 +66,35 @@ namespace Academie.PawnShop.Tests.Application.Services
 
 
             // Act
-            var service = new InventoryService(db);
-            var result = service.ReplenishInventory(product.Id);
+            var manager = new InventoryManager(db);
+            await manager.ReplenishInventory(product.Id);
 
             // Assert
             product.Quantity.ShouldBe(expectedQuantity);
+        }
+
+        [Fact]
+        public async Task InventoryManager_Should_Return_When_Product_Is_Not_Found()
+        {
+            // Arrange
+            var options = new DbContextOptionsBuilder<PawnShopDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            var db = new PawnShopDbContext(options);
+
+            const int quantityToOrder = 5;
+            const int initialQuantity = 2;
+            var product = new Product() {Quantity = initialQuantity};
+            product.SoftDelete(); // We SoftDelete the product so it's not found #QueryFilter
+            db.Products.Add(product);
+            await db.SaveChangesAsync();
+
+            // Act
+            var manager = new InventoryManager(db);
+            await manager.ReplenishInventory(product.Id, quantityToOrder);
+
+            // Assert
+            product.Quantity.ShouldBe(initialQuantity);
         }
 
     }

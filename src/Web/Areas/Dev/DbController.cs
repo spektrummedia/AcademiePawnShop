@@ -85,7 +85,7 @@ namespace Academie.PawnShop.Web.Areas.Dev
 
         private async Task DeleteAllDatabaseObjects()
         {
-            await _db.Database.ExecuteSqlCommandAsync(@"
+            await _db.Database.ExecuteSqlRawAsync(@"
                 declare @str varchar(max)
                 declare cur cursor for
 

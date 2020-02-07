@@ -3,15 +3,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
+using Academie.PawnShop.Domain;
 
 namespace Academie.PawnShop.Web.Pages.Backstore.Products
 {
- //   [Authorize(Roles = "Super Administrator")]
+    [Authorize(Roles = "Super Administrator")]
     public class CreateModel : PageModel
     {
-        private readonly Academie.PawnShop.Domain.PawnShopDbContext _context;
+        private readonly PawnShopDbContext _context;
 
-        public CreateModel(Academie.PawnShop.Domain.PawnShopDbContext context)
+        [BindProperty]
+        public Product Product { get; set; }
+
+        public CreateModel(PawnShopDbContext context)
         {
             _context = context;
         }
@@ -20,9 +24,6 @@ namespace Academie.PawnShop.Web.Pages.Backstore.Products
         {
             return Page();
         }
-
-        [BindProperty]
-        public Product Product { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {

@@ -17,6 +17,7 @@ namespace Academie.PawnShop.Domain
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // This QueryFilter is applied on every query unless specifically ignore 
             builder.Entity<Product>().HasQueryFilter(p => !p.IsDeleted);
 
             base.OnModelCreating(builder);

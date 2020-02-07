@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Academie.PawnShop.Application.Mailing;
 using Academie.PawnShop.Application.Settings;
+using Microsoft.Extensions.Hosting;
 
 namespace Academie.PawnShop.Web.App_Startup
 {
@@ -14,7 +15,7 @@ namespace Academie.PawnShop.Web.App_Startup
     {
         internal static void Configure(
             IServiceCollection services,
-            IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment hostingEnvironment,
             IConfiguration mailingConfig)
         {
             services.Configure<MailingSettings>(mailingConfig);
