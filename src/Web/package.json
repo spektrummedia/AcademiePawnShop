@@ -31,7 +31,7 @@
     "gulp-sourcemaps": "~2.6.0",
     "gulp-uglify": "~2.0",
     "jquery": "^3.2.1",
-    "node-notifier": "~5.0",
+    "node-notifier": "~8.0",
     "postcss-pxtorem": "~4.0"
   },
   "engines": {
